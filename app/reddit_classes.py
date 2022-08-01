@@ -8,7 +8,7 @@ class RedditText(ABC):
     text:str
     time:int
     subreddit:str
-    comments:Iterable
+    comments:Iterable # A post has an iterable of comments, and a comment has an iterable of comments which are replies
 
     def __post_init__(self):
         if self.comments == None:
@@ -26,4 +26,3 @@ class RedditComment(RedditText):
 @dataclass
 class RedditPost(RedditText):
     title:str
-

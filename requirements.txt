@@ -1,3 +1,4 @@
 pmaw
 praw
 pytest
+mysql-connector
