@@ -32,7 +32,7 @@ jobs:
           docker build . --file Dockerfile --tag ${ORG}/${IMAGE_NAME}:${TAG}
       - name: Build database
         run: |
-          docker run -i ${ORG}/${IMAGE_NAME}:${TAG} python /data/init_database.py
+          docker run -i ${ORG}/${IMAGE_NAME}:${TAG} python /db/init_database.py
       - name: Run the tests
         run: |
           docker run -i ${ORG}/${IMAGE_NAME}:${TAG} python -m pytest tests
