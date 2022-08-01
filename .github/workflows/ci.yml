@@ -9,9 +9,9 @@ on:
 jobs:
   test:
     env:
-      ORG: "_"
-      IMAGE_NAME: "python"
-      TAG: "3.9"
+      ORG: "uazhlt"
+      IMAGE_NAME: "ling-508-pa-week5"
+      TAG: "latest"
     runs-on: ubuntu-latest
     services:
       mysql:
