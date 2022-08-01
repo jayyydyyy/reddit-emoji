@@ -27,5 +27,9 @@ class MySQL_Repo:
             init_sql = f.read()
             init_sql = init_sql.replace('\n','')
         
-        res = self.connection.cmd_query_iter(init_sql)
-        return res
+        statements = init_sql.split(';')
+        for statement in statements:
+            if len(statement) > 0:
+                self.cursor.execute(statement+';')
+
+        return list(self.cursor)
