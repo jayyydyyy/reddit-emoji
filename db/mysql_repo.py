@@ -7,15 +7,15 @@ class MySQL_Repo:
             'password': 'root',
             'host' : 'mysql',
             'port' : '3306',
-            # 'host' : 'localhost',
-            # 'port' : '32000',
-            'database':'reddit'
+            #'host' : 'localhost',
+            #'port' : '32000',
         }
-        self.connection = mysql.connector.connect(**config)
+        self.connection:mysql.connector.MySQLConnection = mysql.connector.connect(**config)
         self.cursor = self.connection.cursor()
 
     def __del__(self):
         self.connection.close()
+        self.cursor.close()
 
     def execute(self, sql):
         self.cursor.execute(sql)
@@ -25,4 +25,7 @@ class MySQL_Repo:
         init_sql = ''
         with open('./data/init.sql') as f:
             init_sql = f.read()
-        self.execute(init_sql)
+            init_sql = init_sql.replace('\n','')
+        
+        res = self.connection.cmd_query_iter(init_sql)
+        return res
