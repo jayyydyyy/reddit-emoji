@@ -3,9 +3,12 @@ from app.reddit_classes import *
 from db.mysql_repo import MySQL_Repo
 import pytest
 
+mysql_repo = MySQL_Repo()
+mysql_repo.initialize()
+
 def test_post_insert_access():
     r = RedditPost(id='a0', time=0, title='Title', text='', subreddit = 'subreddit', comments=None)
-    mysql_repo = MySQL_Repo()
+    
     mysql_repo.execute(
         'USE reddit;'
     )
