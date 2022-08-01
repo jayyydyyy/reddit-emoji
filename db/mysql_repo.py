@@ -7,8 +7,8 @@ class MySQL_Repo:
             'password': 'root',
             'host' : 'mysql',
             'port' : '3306',
-            'host' : 'localhost',
-            'port' : '32000',
+            # 'host' : 'localhost',
+            # 'port' : '32000',
             'database':'reddit'
         }
         self.connection = mysql.connector.connect(**config)
