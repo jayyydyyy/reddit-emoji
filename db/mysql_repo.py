@@ -18,7 +18,6 @@ class MySQL_Repo:
         self.connection.close()
 
     def execute(self, sql:str):
-        sql = 'USE reddit ' + sql
         self.cursor.execute(sql)
         return list(self.cursor)
     

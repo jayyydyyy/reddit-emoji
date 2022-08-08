@@ -1,6 +1,7 @@
 from pmaw import PushshiftAPI
 from praw import Reddit
 from dotenv import dotenv_values
+from mysql.connector.errors import DatabaseError
 
 from db.mysql_repo import MySQL_Repo
 from app.pushshift_handler import PushshiftHandler
@@ -16,6 +17,15 @@ class Services:
         reddit = Reddit(client_id=praw_vals['CLIENT_ID'], client_secret=praw_vals['CLIENT_SECRET'], user_agent=praw_vals['USER_AGENT'])
         
         self.repo = MySQL_Repo()
+
+        try:
+            self.repo.initialize()
+        except DatabaseError:
+            pass
+
+        self.repo.execute(
+            'USE reddit;'
+        )
         self.pushshift = PushshiftHandler(pushshift, reddit)
 
     def get_emoji_frequency_for_range(self, after, before, subreddit, limit=1000):
