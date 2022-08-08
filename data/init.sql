@@ -3,7 +3,7 @@ ALTER DATABASE reddit CHARACTER SET utf8 COLLATE utf8_unicode_ci;
 use reddit;
 
 CREATE TABLE post (
-    id VARCHAR(6) NOT NULL,
+    id VARCHAR(10) NOT NULL,
     title TEXT,
     text_field TEXT,
     subreddit TEXT,
@@ -12,8 +12,8 @@ CREATE TABLE post (
 );
 
 CREATE TABLE comment (
-    id VARCHAR(6) NOT NULL,
-    post_id VARCHAR(6) NOT NULL,
+    id VARCHAR(10) NOT NULL,
+    post_id VARCHAR(10) NOT NULL,
     text_field TEXT,
     subreddit TEXT,
     time_posted INT(11),

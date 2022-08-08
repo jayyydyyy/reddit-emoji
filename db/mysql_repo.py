@@ -55,9 +55,9 @@ class MySQL_Repo:
         query_start = 'INSERT INTO post ' \
             + '(id, title, text_field, subreddit, time_posted) '\
             + 'VALUES '
-        vals = ' '.join(
+        vals = ', '.join(
             [
-            '(\"{id}\", \"{title}\", \"{text_field}\", \"{subreddit}\", {time_posted})'.format(id=r.id, title=r.title, text_field=r.text, subreddit=r.subreddit, time_posted=r.time)
+            '(\"{id}\", \"{title}\", \"{text_field}\", \"{subreddit}\", {time_posted})'.format(id=r.id, title="TITLE", text_field="TEXT", subreddit=r.subreddit, time_posted=r.time)
             for r in posts
             ]
         )
@@ -68,9 +68,9 @@ class MySQL_Repo:
         query_start = 'INSERT INTO comment ' \
             + '(id, post_id, text_field, subreddit, time_posted) '\
             + 'VALUES '
-        vals = ' '.join(
+        vals = ', '.join(
             [
-            '(\"{id}\", \"{post_id}\", \"{text_field}\", \"{subreddit}\", {time_posted})'.format(id=r.id, post_id=r.post_id, text_field=r.text, subreddit=r.subreddit, time_posted=r.time)
+            '(\"{id}\", \"{post_id}\", \"{text_field}\", \"{subreddit}\", {time_posted})'.format(id=r.id, post_id=r.post_id, text_field="TEXT", subreddit=r.subreddit, time_posted=r.time)
             for r in posts
             ]
         )
