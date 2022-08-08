@@ -12,10 +12,11 @@ class PushshiftHandler:
         for post in raw_posts:
             try: selftext = post['selftext']
             except KeyError: selftext = ''
-            post_list.append(RedditPost(id='t3_'+post['id'], text=selftext, time=int(post['created_utc']), subreddit=subreddit, comments=[], title=post['title']))
+            post_list.append(RedditPost(id='t3_'+post['id'], text=selftext.replace('"', ''), time=int(post['created_utc']), subreddit=subreddit, comments=[], title=post['title'].replace('"', '')))
         for post in post_list:
-            raw_comments = self.api.search_comments(link_id=post.id)
-            comments = [RedditComment(id='t1_'+comment['id'], text=comment['body'], time=int(comment['created_utc']), subreddit=subreddit) for comment in raw_comments]
+            post_id = post.id
+            raw_comments = self.api.search_comments(link_id=post_id)
+            comments = [RedditComment(id='t1_'+comment['id'],post_id=post_id, text=comment['body'].replace('"', ''), time=int(comment['created_utc']), subreddit=subreddit) for comment in raw_comments]
             post.comments = comments
 
         return post_list

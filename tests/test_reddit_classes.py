@@ -22,17 +22,19 @@ def test_post_to_dict():
     assert rd.get('comments') == []
 
 def test_comment_construction():
-    r = RedditComment(id='a0', time=0, text='', subreddit = 'subreddit')
+    r = RedditComment(id='a0', post_id='a1', time=0, text='', subreddit = 'subreddit')
     assert r.id == 'a0'
+    assert r.post_id == 'a1'
     assert r.time == 0
     assert r.text == ''
     assert r.subreddit == 'subreddit'
 
 def test_comment_to_dict():
-    r = RedditComment(id='a0', time=0, text='', subreddit = 'subreddit')
+    r = RedditComment(id='a0', post_id='a1', time=0, text='', subreddit = 'subreddit')
     rd = r.to_dict()
 
     assert rd.get('id') == 'a0'
+    assert rd.get('post_id') == 'a1'
     assert rd.get('time') == 0
     assert rd.get('text') == ''
     assert rd.get('subreddit') == 'subreddit'

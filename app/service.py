@@ -20,7 +20,8 @@ class Services:
 
     def get_emoji_frequency_for_range(self, after, before, subreddit, limit=1000):
         posts = self.pushshift.get_posts(after, before, subreddit, limit)
-        
+        self.repo.batch_insert_post(posts)
+
         texts = []
         for p in posts:
             texts.append(p.title)
@@ -28,6 +29,7 @@ class Services:
 
             if len(p.comments) == 0 : continue
 
+            self.repo.batch_insert_comment(p.comments)
             for c in p.comments:
                 texts.append(c.text)
 

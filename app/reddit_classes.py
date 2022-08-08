@@ -16,7 +16,7 @@ class RedditText(ABC):
 
 @dataclass
 class RedditComment(RedditText):
-    ...
+    post_id:str
 
 @dataclass
 class RedditPost(RedditText):
