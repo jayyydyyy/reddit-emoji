@@ -1,4 +1,5 @@
 import mysql.connector
+from app.reddit_classes import *
 
 class MySQL_Repo:
     def __init__(self) -> None:
@@ -15,7 +16,6 @@ class MySQL_Repo:
 
     def __del__(self):
         self.connection.close()
-        self.cursor.close()
 
     def execute(self, sql):
         self.cursor.execute(sql)
@@ -33,3 +33,12 @@ class MySQL_Repo:
                 self.cursor.execute(statement+';')
 
         return list(self.cursor)
+
+    def insert_post(self, r:RedditPost):
+        self.execute(
+            'INSERT INTO post '
+            '(id, title, text_field, subreddit, time_posted) '
+            'VALUES '
+            '(\"{id}\", \"{title}\", \"{text_field}\", \"{subreddit}\", {time_posted})'
+            ';'.format(id=r.id, title=r.title, text_field=r.text, subreddit=r.subreddit, time_posted=r.time)
+        )

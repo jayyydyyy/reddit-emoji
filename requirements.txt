@@ -2,3 +2,5 @@ pmaw
 praw
 pytest
 mysql-connector
+emoji
+python-dotenv

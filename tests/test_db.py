@@ -3,19 +3,21 @@ from app.reddit_classes import *
 from db.mysql_repo import MySQL_Repo
 import pytest
 
+mysql_repo = MySQL_Repo()
+    
+try:
+    mysql_repo.initialize()
+except DatabaseError:
+    pass
+
+mysql_repo.execute(
+    'USE reddit;'
+)
+
+
 def test_post_insert_access():
     r = RedditPost(id='a0', time=0, title='Title', text='', subreddit = 'subreddit', comments=None)
     
-    mysql_repo = MySQL_Repo()
-    
-    try:
-        mysql_repo.initialize()
-    except DatabaseError:
-        pass
-
-    mysql_repo.execute(
-        'USE reddit;'
-    )
     mysql_repo.execute(
         'INSERT INTO post '
         '(id, title, text_field, subreddit, time_posted) '
