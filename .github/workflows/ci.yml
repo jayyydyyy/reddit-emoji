@@ -9,9 +9,9 @@ on:
 jobs:
   test:
     env:
-      ORG: uazhlt
-      IMAGE_NAME: ling-508-pa-week6
-      TAG: latest
+      ORG: "uazhlt"
+      IMAGE_NAME: "ling-508-pa-week6"
+      TAG: "latest"
     runs-on: ubuntu-latest
     
     services:
