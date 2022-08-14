@@ -9,9 +9,8 @@ on:
 jobs:
   test:
     env:
-      ORG: uazhlt
-      IMAGE_NAME: ling-508-pa-week5
-      TAG: latest
+      IMAGE_NAME: python
+      TAG: 3.9
     runs-on: ubuntu-latest
     
     services:
