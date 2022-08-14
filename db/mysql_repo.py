@@ -6,9 +6,10 @@ class MySQL_Repo:
         config = {
             'user' : 'root',
             'password': 'root',
-            'host' : 'mysql',
-            'port' : '3306',
+            'host':'db',
+            #'host' : 'mysql',
             #'host' : 'localhost',
+            'port' : '3306',
             #'port' : '32000',
         }
         self.connection:mysql.connector.MySQLConnection = mysql.connector.connect(**config)

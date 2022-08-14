@@ -1,6 +1,9 @@
 pmaw
 praw
+psaw
 pytest
 mysql-connector
 emoji
 python-dotenv
+flask
+flask_cors

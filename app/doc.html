@@ -1,0 +1,32 @@
+<h1 id="reddit-emoji-frequencies">Reddit Emoji Frequencies</h1>
+<h2 id="getting-emoji-counts">Getting emoji counts</h2>
+<p>The endpoint located at &quot;/emoji&quot; provides the user with a dictionary where keys are emoji, and the associated values are the counts of those emoji for the given subreddit within the given time range. </p>
+<p>The service can be accessed without a UI using a POST request. The JSON body of the request must contain the following fields:</p>
+<p>The required fields are the following:</p>
+<ul>
+<li>subreddit : string (The subreddit to search)</li>
+<li>after : string (The start date for the time range to search, formatted YYYY-MM-DD)</li>
+<li>before : string (The end date for the time range to search, formatted YYYY-MM-DD)</li>
+</ul>
+<p>An optional field can be:</p>
+<ul>
+<li>limit : string/int (the number of requests to make using Pushshift / Reddit API)</li>
+</ul>
+<p>Here is an example request body with all the possible fields:</p>
+<pre><code class="lang-JSON">{
+  <span class="hljs-attr">"subreddit"</span>: <span class="hljs-string">"tokipona"</span>,
+  <span class="hljs-attr">"after"</span>: <span class="hljs-string">"2022-07-01"</span>,
+  <span class="hljs-attr">"before"</span>: <span class="hljs-string">"2022-07-29"</span>,
+  <span class="hljs-attr">"limit"</span>: <span class="hljs-string">"100"</span>
+}
+</code></pre>
+<p>Here is a complete CURL command for to acheive the same request:</p>
+<pre><code>curl -X <span class="hljs-symbol">'POST</span><span class="hljs-string">' '</span>http://<span class="hljs-number">0.0</span>.<span class="hljs-number">0.0</span>:<span class="hljs-number">5000</span>/emoji' -H <span class="hljs-symbol">'accept</span>: application/json' -H <span class="hljs-symbol">'Content</span>-<span class="hljs-keyword">Type</span>: application/json' -d '{<span class="hljs-string">"subreddit"</span>:<span class="hljs-string">"tokipona"</span>, <span class="hljs-string">"after"</span>:<span class="hljs-string">"2022-07-01"</span>,<span class="hljs-string">"before"</span>:<span class="hljs-string">"2022-07-29"</span>, <span class="hljs-string">"limit"</span>:<span class="hljs-number">100</span>}'
+</code></pre><p>The response will come back formatted as such:</p>
+<pre><code class="lang-JSON">{
+  <span class="hljs-attr">"🇫🇷"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"😉"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"🤔"</span>: <span class="hljs-number">1</span>,
+  <span class="hljs-attr">"🥖"</span>: <span class="hljs-number">1</span>
+}
+</code></pre>
