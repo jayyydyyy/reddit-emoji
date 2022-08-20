@@ -17,7 +17,6 @@ def doc():
 @app.route('/emoji', methods=['POST'])
 @cross_origin(origin='localhost', headers=['Content-Type', 'Authorization'])
 def emoji():
-    
     services = Services()
     request_data = request.get_json()
     after = services.date_str_to_unix(request_data.get('after', '2020-01-01'))

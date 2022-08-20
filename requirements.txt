@@ -3,6 +3,9 @@ praw
 psaw
 pytest
 mysql-connector
+pymysql
+sqlalchemy
+psycopg2-binary
 emoji
 python-dotenv
 flask

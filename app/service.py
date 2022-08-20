@@ -1,10 +1,10 @@
-# from pmaw import PushshiftAPI
 from psaw import PushshiftAPI
 from praw import Reddit
 from dotenv import dotenv_values
 from mysql.connector.errors import DatabaseError
 
-from db.mysql_repo import MySQL_Repo
+from db.mysql_alchemy_repo import MySQL_Alchemy_Repo
+
 from app.pushshift_handler import PushshiftHandler
 from app.text_processing import EmojiHandler
 
@@ -13,22 +13,12 @@ import datetime as dt
 praw_vals = dotenv_values('.env')
 
 class Services:
-    def __init__(self) -> None:
+    def __init__(self, local=False) -> None:
         reddit = Reddit(client_id=praw_vals['CLIENT_ID'], client_secret=praw_vals['CLIENT_SECRET'], user_agent=praw_vals['USER_AGENT'])
         
-        # pushshift = PushshiftAPI(praw = reddit)
         pushshift = PushshiftAPI(reddit)
 
-        self.repo = MySQL_Repo()
-
-        try:
-            self.repo.initialize()
-        except DatabaseError:
-            pass
-
-        self.repo.execute(
-            'USE reddit;'
-        )
+        self.repo = MySQL_Alchemy_Repo(local)
         
         self.pushshift = PushshiftHandler(pushshift)
 

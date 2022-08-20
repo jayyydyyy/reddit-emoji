@@ -1,7 +1,8 @@
 import mysql.connector
 from app.reddit_classes import *
+from db.repo import Repo
 
-class MySQL_Repo:
+class MySQL_Repo(Repo):
     def __init__(self) -> None:
         config = {
             'user' : 'root',
@@ -53,26 +54,37 @@ class MySQL_Repo:
         )
 
     def batch_insert_post(self, posts:Iterable[RedditPost]):
-        query_start = 'INSERT INTO post ' \
-            + '(id, title, text_field, subreddit, time_posted) '\
-            + 'VALUES '
+        self.execute(
+            'USE reddit;'
+        )
+        
+        query_start = (
+            'INSERT INTO post '
+            '(id, title, text_field, subreddit, time_posted) '
+            'VALUES '
+        )
+        
         vals = ', '.join(
             [
-            '(\"{id}\", \"{title}\", \"{text_field}\", \"{subreddit}\", {time_posted})'.format(id=r.id, title="TITLE", text_field="TEXT", subreddit=r.subreddit, time_posted=r.time)
+            f"('{r.id}', 'title_placeholder', 'text_placeholder', '{r.subreddit}', {r.time})"
             for r in posts
             ]
         )
-
+        
         self.execute(query_start+vals+';')
 
-    def batch_insert_comment(self, posts:Iterable[RedditComment]):
+    def batch_insert_comment(self, comments:Iterable[RedditComment]):
+        self.execute(
+            'USE reddit;'
+        )
+        
         query_start = 'INSERT INTO comment ' \
             + '(id, post_id, text_field, subreddit, time_posted) '\
             + 'VALUES '
         vals = ', '.join(
             [
-            '(\"{id}\", \"{post_id}\", \"{text_field}\", \"{subreddit}\", {time_posted})'.format(id=r.id, post_id=r.post_id, text_field="TEXT", subreddit=r.subreddit, time_posted=r.time)
-            for r in posts
+            f"('{r.id}', '{r.post_id}', 'text_placeholder', '{r.subreddit}', {r.time})"
+            for r in comments
             ]
         )
 
